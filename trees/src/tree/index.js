@@ -3,7 +3,7 @@ import tree from "./data.json";
 
 function indentStyle(indentLevel) {
   return {
-    "text-indent": `${4*indentLevel}ch`
+    textIndent: `${4*indentLevel}ch`
   }
 }
 
@@ -18,7 +18,7 @@ function flattenTree(tree, level=0) {
 }
 
 function nodeElement({name, level}) {
-  return <p style={indentStyle(level)}>{name}</p>;
+  return <p key={name} style={indentStyle(level)}>{name}</p>;
 }
 
 export default function Tree() {
