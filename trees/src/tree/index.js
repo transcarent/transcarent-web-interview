@@ -10,27 +10,27 @@ function indentStyle(indentLevel) {
 
 // flatten to Array<{name: string; level:number;}>
 function flattenTree(tree, level=0) {
-  const { name, children } = tree;
+  const { name, nodeId, children } = tree;
   const childElements =
     children
     .map(child => flattenTree(child, level + 1))
     .flat();
-  return [ {name, level}, ...childElements ]
+  return [ {name, nodeId, level}, ...childElements ]
 }
 
-function cloneTree({name, children}) {
+function cloneTree({name, children, nodeId}) {
   const childClones = children.map(cloneTree);
   return Object.assign({}, {
-    name, children: childClones
+    name, nodeId, children: childClones
   });
 }
 
-function findElement(tree, name) {
-  if (tree.name === name) {
-    return tree;
+function findElement(node, predicate) {
+  if (predicate(node)) {
+    return node;
   }
-  for (const child of tree.children) {
-    const found = findElement(child, name);
+  for (const child of node.children) {
+    const found = findElement(child, predicate);
     if (found) {
       return found;
     }
@@ -44,7 +44,6 @@ export default class Tree extends React.Component {
     this.state = { tree: data };
   }
   render() {
-    console.log("render");
     const treeElements =
       flattenTree(this.state.tree)
       .map(this.nodeElement.bind(this));
@@ -54,20 +53,21 @@ export default class Tree extends React.Component {
       </div>
     );
   }
-  updateElement(name, event) {
+  updateElement(nodeId, event) {
     event.preventDefault();
     const newTree = cloneTree(this.state.tree);
-    const nodeToUpdate = findElement(newTree, name);
-    nodeToUpdate.name = event.target[0].value;
+    const newName = event.target[0].value;
+    const nodeToUpdate = findElement(newTree, (node) => node.nodeId === nodeId);
+    nodeToUpdate.name = newName;
     this.setState({tree: newTree});
   }
-  nodeElement({name, level}) {
+  nodeElement({name, nodeId, level}) {
     return (
-      <div key={name}>
+      <div key={nodeId}>
         <p style={indentStyle(level)} >
           {name}
         </p>
-        <form onSubmit={this.updateElement.bind(this, name)}>
+        <form onSubmit={this.updateElement.bind(this, nodeId)}>
           <input type="text" style={indentStyle(level)} />
         </form>
       </div>

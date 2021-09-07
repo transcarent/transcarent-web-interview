@@ -1,19 +1,22 @@
 {
     "name": "root",
+    "nodeId": 100,
     "children": [
-        { "name": "ant", "children": [] },
+        { "name": "ant", "nodeId": 101, "children": [] },
         {
             "name": "bear",
+            "nodeId": 102,
             "children": [
                 {
                     "name": "cat",
+                    "nodeId": 103,
                     "children": [
-                        { "name": "dog", "children": [] },
-                        { "name": "elephant", "children": [] }
+                        { "name": "dog", "nodeId": 104, "children": [] },
+                        { "name": "elephant", "nodeId": 105, "children": [] }
                     ]
                 }
             ]
         },
-        { "name": "frog", "children": [] }
+        { "name": "frog", "nodeId": 106, "children": [] }
     ]
 }
