@@ -1,13 +1,13 @@
 import "./index.css";
 import tree from "./data.json"
 
-function TreeNode({ value, childNodes = [] }) {
+function TreeNode({ value, childNodes = [], path = '' }) {
   return (
     <div class="node">
-      <div class="value">{value}</div>
+      <div class="value">{path} {value}</div>
       {childNodes.map(({
         value, children: childNodes
-      }) => <div class="children"><TreeNode value={value} childNodes={childNodes}></TreeNode></div>)}
+      }, index) => <div class="children"><TreeNode value={value} childNodes={childNodes} path={`${path}.${index + 1}`}></TreeNode></div>)}
     </div>
   );
 }
@@ -15,7 +15,7 @@ function TreeNode({ value, childNodes = [] }) {
 export default function Tree() {
   return (
     <div className="tree">
-      <TreeNode value={tree.value} childNodes={tree.children}></TreeNode>
+      <TreeNode value={tree.value} childNodes={tree.children} path='1'></TreeNode>
     </div>
   );
 }
