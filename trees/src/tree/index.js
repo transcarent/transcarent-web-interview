@@ -1,10 +1,13 @@
 import "./index.css";
+import tree from "./data.json"
 
-function TreeNode({ value, children }) {
+function TreeNode({ value, childNodes = [] }) {
   return (
     <div class="node">
       <div class="value">{value}</div>
-      <div class="children">{children}</div>
+      {childNodes.map(({
+        value, children: childNodes
+      }) => <div class="children"><TreeNode value={value} childNodes={childNodes}></TreeNode></div>)}
     </div>
   );
 }
@@ -12,16 +15,7 @@ function TreeNode({ value, children }) {
 export default function Tree() {
   return (
     <div className="tree">
-      <TreeNode value="root">
-        <TreeNode value="ant" />
-        <TreeNode value="bear">
-          <TreeNode value="cat"></TreeNode>
-          <TreeNode value="dog">
-            <TreeNode value="elephant"></TreeNode>
-          </TreeNode>
-        </TreeNode>
-        <TreeNode value="frog" />
-      </TreeNode>
+      <TreeNode value={tree.value} childNodes={tree.children}></TreeNode>
     </div>
   );
 }
