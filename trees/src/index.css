@@ -15,10 +15,22 @@ code {
     monospace;
 }
 
+.tree {
+  position: relative;
+}
+
+.old-tree {
+  /* margin-top: 5px; */
+  /* uncomment ^ this ^ to verify any misalignment should be apparent */
+  opacity: 0.5;
+  position: absolute;
+}
+
 .node .children {
   margin: 1rem 0 1rem 2.2rem;
 }
 
 .node .value {
+  opacity: 0.8;
   display: block;
 }
