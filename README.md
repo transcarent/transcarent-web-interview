@@ -3,7 +3,7 @@ This is a take home interview to be shared with prospective interviewees.
 # Start here
 1. Clone this repo DO NOT fork
 2. Make your repo private
-3. Add moog16, nikolicu, enagle-transcarent and tc-achavez as collaborators
+3. Add moog16, nikolicu, enagle-transcarent as collaborators
 4. `cd trees`
 5. Run `npm install`
 6. Run `npm start`
