@@ -1,3 +1,5 @@
+This is a take home interview to be shared with prospective interviewees. 
+
 # Start here
 1. Clone this repo DO NOT fork
 2. Make your repo private
